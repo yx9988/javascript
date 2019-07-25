@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function Merge(s1,s2){
+        result="";
+        var max=Math.max(s1.length,s2.length);
+        for(var i=0;i<max;i++){
+            if(i<s1.length){
+                result+=s1.charAt(i);
+            }
+            if(i<s2.length){
+                result+=s2.charAT(i);
+            }
+        }
+        return result;
+    }    
+
+    console.log(Merge("123456","abc"));
+    </script>
+</body>
+</html>

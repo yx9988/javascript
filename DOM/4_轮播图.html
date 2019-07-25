@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container{
+            position: relative;
+            width: 750px;
+            margin: 150px auto;
+        }
+        #num-list{
+            list-style:none;
+        }
+        #img-list{
+            list-style:none;
+       
+            
+        }
+        #tianmao{
+            margin:150px;
+        }
+        #img-list img{
+            display: none;
+            
+        }
+        #img-list .selected{
+            display:block;
+        }
+        #num-list li,#arrow-box li{
+            float:left;
+            background: #333;
+            width: 20px;
+            height: 20px;
+            color:azure;
+            line-height:20px;
+            text-align:center;
+            font-size:14px;
+            margin-right:10px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+        #num-list{
+            position: absolute;
+            bottom:5px;
+            right:10px;
+            list-style:none;
+        }
+        #num-list .active{
+            background: red;
+        }
+        #arrow-box{
+            list-style:none;
+            position: absolute;
+            left:10px;
+            bottom:5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        
+        <ul id="num-list">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+               
+        <div id="img-list">
+            <div><img class="selected" src="img/1.jpg" alt=""></div>
+            <div><img src="img/2.jpg" alt=""></div>
+            <div><img src="img/3.jpg" alt=""></div>
+            <div><img src="img/4.jpg" alt=""></div>
+            <div><img src="img/5.jpg" alt=""></div>
+        </div>
+
+        <ul id="arrow-box">
+            <li id="prev">&lt</li>
+            <li id="next">&gt</li>
+        </ul>
+    </div>
+
+    <script>
+        var oContainer=document.getElementById('container')
+        var oUl=document.getElementById('num-list');
+        var aLi=oUl.getElementsByTagName('li');
+        var oImg=document.getElementById('img-list');
+        var aImg=oImg.getElementsByTagName('img');
+        var oNext=document.getElementById('next');
+        var oPrev=document.getElementById('prev');
+        var iNow=0;
+
+
+
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].index=i;
+            aLi[i].onclick=function(){
+                change(this.idx);
+                iNow=this.idx;
+                
+            }
+        }
+        oNext.onclick=function(){
+            iNow++;
+            if(iNow==aLi.length){
+                iNow=0;
+            }
+            change(iNow)
+        }
+        oPrev.onclick=function(){
+            iNow--;
+            if(iNow==-1){
+                iNow=aLi.length-1;
+            }
+            change(iNow);
+        }
+        function change(index){
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].className="";
+                aImg[i].className="";
+            }
+            aLi[index].className="active";
+            aImg[index].className="selected";
+
+        }
+
+        var timer=setInterval(oNext.onclick,1000);
+        oContainer.onmouseout = function(){
+            timer = setInterval(oNext.onclick,1000);
+        }
+        oContainer.onmouseover = function(){
+            clearInterval(timer);
+        }
+        
+
+    </script>
+</body>
+</html>
